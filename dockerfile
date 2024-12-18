@@ -3,9 +3,9 @@
 # 24.10 works
 # FROM ubuntu:24.10
 # python:3-bookworm works
-# FROM python:3-bookworm
-# python:3-slim-bookworm works
-FROM python:3-slim-bookworm
+FROM python:3-bookworm
+# python:3-slim-bookworm FAILS
+# FROM python:3-slim-bookworm
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
