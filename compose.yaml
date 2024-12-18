@@ -1,9 +1,30 @@
 services:
+    # docker compose up --build --watch
     demo:
-        build: .
-        user: 1000:1000
-        volumes:
-            - type: bind
-              source: .
-              target: /app
-        command: bash -c 'uv sync --locked; uv tree; uv run main.py'
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                - USER_ID=1000
+                - GROUP_ID=1000
+        command: bash -c 'uv sync --locked; uv tree; uv run main.py; sleep infinity'
+        user: "1000"
+        tty: true
+        develop:
+            watch:
+                - action: sync+restart
+                  path: .
+                  target: /app
+                  ignore:
+                    - "__pycache__/"
+                    - "__pycache__/"
+                    - ".git/"
+                    - ".venv/"
+                    - ".vscode/"
+                    - "*.egg-info"
+                    - "*.md"
+                    - "*.py[oc]"
+                    - "*.pyc"
+                    - "build/"
+                    - "dist/"
+                    - "wheels/"

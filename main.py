@@ -43,6 +43,7 @@ def main() -> None:
     )
     log.info(f"Data summary: {data.shape} <{data.dtype}>")
     log.info(f"Data contents: {data}")
+    log.info("Finished!")
 
 
 class Bounds(NamedTuple):

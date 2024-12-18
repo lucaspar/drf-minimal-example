@@ -12,7 +12,13 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get install -y \
     build-essential libhdf5-dev
 
-# change this to your user id: `id -u`
-USER 1000
+# create a non-root user
+ARG USER_ID
+ARG GROUP_ID
+# RUN useradd -m -u $USER_ID -g $GROUP_ID -s /bin/bash user
+
+COPY --chown=$USER_ID:$GROUP_ID . /app
+
+USER user
 
 WORKDIR /app
