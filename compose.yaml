@@ -1,0 +1,9 @@
+services:
+    demo:
+        build: .
+        user: 1000:1000
+        volumes:
+            - type: bind
+              source: .
+              target: /app
+        command: bash -c 'uv sync --locked; uv tree; uv run main.py'
